@@ -5,12 +5,13 @@ import "ag-grid-community/styles/ag-grid.css";
 import "ag-grid-community/styles/ag-theme-quartz.css";
 import React, { StrictMode, useCallback, useMemo, useState, useRef } from "react";
 import axios from 'axios';
+import { CheckboxCellRenderer } from "ag-grid-community";
 
-const GridExample = () => {
+const App = () => {
   const gridRef = useRef(null);
 
   const columnDefs = [
-    { headerName: "Title", field: "Title", sortable: true, filter: true },
+    { headerName: "Title", field: "Title", sortable: true, filter: true , cellRenderer: "loading" },
     { headerName: "Year", field: "Year", sortable: true },
     { headerName: "Type", field: "Type" },
     { headerName: "IMDb ID", field: "imdbID" },
@@ -25,6 +26,7 @@ const GridExample = () => {
 
   const fetchMovies = async (pageNumber, pageSize) => {
     try {
+      await new Promise(resolve => setTimeout(resolve, 2000));
       const response = await axios.get(
         `https://www.omdbapi.com/?apikey=89558e10&s=movie&page=${pageNumber}`
       );
@@ -58,17 +60,19 @@ const GridExample = () => {
         params.api.setGridOption("datasource", dataSource);
       
   }, []);
-  
-  
-  const components={
-    loading:(params)=>{
-      if(params.value!==undefined){
+
+  const component = {
+    loading : (params) => {
+      if (params.value != undefined){
         return params.value
-      }else{
-        return "<img src='https://www.ag-grid.com/example-assets/loading.gif'/>"
+
+      }
+      else{
+        return "Loading..."
       }
     }
   }
+
   
   return (
     <div className="ag-theme-alpine" style={{ height: 600, width: '100%' }}>
@@ -80,11 +84,11 @@ const GridExample = () => {
         cacheBlockSize={10} // Number of rows per block
         onGridReady={onGridReady}
         animateRows
-        components={components}
+        components={component}
         datasource={dataSource}
       />
     </div>
   );
 };
 
-export default GridExample;
+export default App;

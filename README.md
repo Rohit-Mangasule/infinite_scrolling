@@ -13,7 +13,6 @@ This project is a React application that displays movie details using the AG Gri
 1. Clone the repository:
    ```sh
    git clone https://github.com/Rohit-Mangasule/infinite_scrolling
-   cd movie_details
    ```
 
 2. ```sh
