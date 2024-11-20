@@ -1,11 +1,11 @@
 "use strict";
-
 import { AgGridReact } from "ag-grid-react";
 import "ag-grid-community/styles/ag-grid.css";
 import "ag-grid-community/styles/ag-theme-quartz.css";
-import React, { StrictMode, useCallback, useMemo, useState, useRef } from "react";
+import React, {  useCallback , useRef } from "react";
 import axios from 'axios';
-import { CheckboxCellRenderer } from "ag-grid-community";
+
+import PopupImageRenderer from "./popupImage";
 
 const App = () => {
   const gridRef = useRef(null);
@@ -15,6 +15,7 @@ const App = () => {
     { headerName: "Year", field: "Year", sortable: true },
     { headerName: "Type", field: "Type" },
     { headerName: "IMDb ID", field: "imdbID" },
+    { headerName: "Poster", field: "Poster",  cellRenderer : PopupImageRenderer}
   ];
 
   const defaultColDef = {
@@ -49,7 +50,6 @@ const App = () => {
       // Fetch movie data
       const movies = await fetchMovies(pageNumber, pageSize);
       
-      // Call successCallback with the data
       params.successCallback(movies, 1000);
     },
   };
@@ -85,7 +85,6 @@ const App = () => {
         onGridReady={onGridReady}
         animateRows
         components={component}
-        datasource={dataSource}
       />
     </div>
   );

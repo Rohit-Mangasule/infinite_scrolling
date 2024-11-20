@@ -1,0 +1,51 @@
+/* Styling for the image thumbnail */
+
+.poster-container {
+    display: flex;
+    justify-content: left;
+    align-items: center;
+    height: 50px;
+    overflow: hidden;
+    transition: all 0.3s ease-in-out;
+  }
+.thumbnail-image {
+    width: 100%; /* Scale to fit the cell */
+    height: auto; /* Maintain aspect ratio */
+    cursor: pointer;
+    border-radius: 4px;
+    object-fit: contain; /* Ensure the image fits inside the cell */
+    transition: transform 0.3s ease;
+}
+
+.thumbnail-image:hover {
+    transform: scale(1.1); /* Zoom effect on hover */
+}
+
+/* Styling for the popup image */
+.popup-image {
+    max-width: 90%; /* Adjust size as needed */
+    max-height: 90vh; /* Prevent overflow */
+    border-radius: 4px;
+    cursor: pointer;
+    object-fit: contain;
+}
+
+/* Container for the popup image */
+.image-container {
+    display: flex;
+    justify-content: left;
+    align-items: center;
+    padding: 1rem;
+    background-color: rgba(0, 0, 0, 0.7); /* Dark background */
+    border-radius: 8px;
+    box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.5);
+}
+
+/* AG Grid cell styling (optional override) */
+.ag-cell {
+    display: flex;
+    justify-content: left;
+    align-items: center;
+    padding: 0; /* Remove default padding */
+    overflow: hidden; /* Prevent overflow issues */
+}
